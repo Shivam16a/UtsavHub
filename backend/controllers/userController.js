@@ -2,9 +2,15 @@ const User = require('../models/users.js');
 const bcrypt = require('bcrypt');
 
 // ================= REGISTER =================
+// Register user
 exports.registerUser = async (req, res) => {
     try {
-        const { username, email, prn, phone, password } = req.body;
+        const { username, email, prn, phone, password, gender, description } = req.body;
+
+        let profilepic = null;
+        if (req.file) {
+            profilepic = req.file.filename; // ya req.file.path
+        }
 
         const existingUser = await User.findOne({ prn });
         if (existingUser) {
@@ -18,18 +24,19 @@ exports.registerUser = async (req, res) => {
             email,
             prn,
             phone,
+            gender,
+            description,
+            profilepic,
             password: hashedPassword
         });
 
-        res.status(201).json({
-            message: "User registered successfully",
-            user
-        });
+        res.status(201).json({ message: "User registered successfully", user });
 
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 // ================= LOGIN =================
 exports.loginUser = async (req, res) => {
