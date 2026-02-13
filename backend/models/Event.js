@@ -29,10 +29,6 @@ const eventSchema = new mongoose.Schema({
     },
     bannerImage: {
         type: String
-    },
-    shares: {
-        type: Number,
-        default: 0
     }
 }, { timestamps: true });
 

@@ -28,19 +28,6 @@ const EventDetails = () => {
     fetchEvent();
   }, [id]);
 
-  const handleShare = async () => {
-    try {
-      const res = await fetch(`http://localhost:5650/api/events/share/${id}`, {
-        method: "PUT",
-        credentials: "include",
-      });
-      const data = await res.json();
-      fetchEvent(); // Refresh event data
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   if (error) return <div className="alert alert-danger">{error}</div>;
   if (!event) return <h2 className="text-center py-5">Loading...</h2>;
 
@@ -71,13 +58,6 @@ const EventDetails = () => {
                 <strong>Organizer:</strong>{" "}
                 {event.organizer?.username || "Unknown"}
               </p>
-              <p>
-                <strong>Shares:</strong> {event.shares}
-              </p>
-              <button className="btn btn-success mb-3" onClick={handleShare}>
-                Share Event
-              </button>
-
               {/* Comment Section */}
               <CommentSection eventId={id} />
             </div>

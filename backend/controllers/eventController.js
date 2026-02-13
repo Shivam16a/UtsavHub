@@ -71,18 +71,17 @@ exports.getSingleEvent = async (req, res) => {
   }
 };
 
-// SHARE EVENT
-exports.shareEvent = async (req, res) => {
+// ================= GET USER'S EVENTS =================
+exports.getUserEvents = async (req, res) => {
   try {
-    const event = await Event.findById(req.params.id);
-    if (!event) return res.status(404).json({ message: "Event not found" });
+    if (!req.session.userId) {
+      return res.status(401).json({ message: "User not authenticated" });
+    }
 
-    event.shares += 1;
-    await event.save();
+    const events = await Event.find({ organizer: req.session.userId }).sort({ createdAt: -1 });
 
-    res.json({ message: "Event shared", shares: event.shares });
+    res.json(events);
   } catch (error) {
-    console.error("Share Event Error:", error);
     res.status(500).json({ message: error.message });
   }
 };
