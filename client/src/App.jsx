@@ -5,14 +5,16 @@ import Home from './pases/Home'
 import "./App.css"
 import Register from './pases/Register'
 import Login from './pases/Login'
+import Profile from './components/Profile'
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Home/>
       <Routes>
+        <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login/>}/>
+        <Route path='/login' element={<Login />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </BrowserRouter>
   )
