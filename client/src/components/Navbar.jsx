@@ -23,7 +23,7 @@ const Navbar = () => {
     setUser(null);
     navigate("/login");
   };
-
+  console.log(user);
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark"
@@ -84,13 +84,22 @@ const Navbar = () => {
                 <i className="fa-solid fa-plus"></i>
               </Link>
 
-              <Link 
+              <Link
                 to="/"
                 className="text-white fs-4 nav-icon"
                 title="Home"
               >
-                <i class="fas fa-home"></i>
+                <i className="fas fa-home"></i>
               </Link>
+              {user.role === 'admin' ? (
+                <Link
+                  to="/admin"
+                  className="text-white fs-4 nav-icon"
+                  title="Admin"
+                >
+                  <i className="fas fa-user-shield"></i>
+                </Link>
+              ) : (<></>)}
 
               <Link
                 to="/profile"

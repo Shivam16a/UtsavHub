@@ -9,6 +9,7 @@ import Profile from './components/Profile'
 import EventDetails from './pases/EventDetails'
 import CreateEvent from './pases/CreateEvent'
 import Navbar from './components/Navbar'
+import Admin from './components/Admin'
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/admin' element={<Admin/>}/>
       </Routes>
     </BrowserRouter>
   )
