@@ -40,13 +40,13 @@ const Profile = () => {
       const data = await res.json();
       if (res.ok) {
         setUser(data.updatedUser);
-        alert("Profile Updated ✅");
+        alert("Profile Updated ");
       } else {
-        alert(data.message || "Update failed ❌");
+        alert(data.message || "Update failed ");
       }
     } catch (err) {
       console.log(err);
-      alert("Network error ❌");
+      alert("Network error ");
     }
   };
 

@@ -56,6 +56,7 @@ const Login = () => {
               className="form-control bg-light text-dark border-0"
               id="prn"
               placeholder="PRN"
+              autoComplete="off"
               value={formData.prn}
               onChange={handleChange}
               required
@@ -70,6 +71,7 @@ const Login = () => {
               className="form-control bg-light text-dark border-0"
               id="password"
               placeholder="Password"
+              autoComplete="off"
               value={formData.password}
               onChange={handleChange}
               required

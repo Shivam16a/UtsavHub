@@ -31,19 +31,24 @@ const Events = () => {
   return (
     <div className="container py-5">
       <h2 className="mb-4 text-center">All Events</h2>
-      <div className="row">
-        {events.length === 0 ? (
-          <p className="text-center">No events found.</p>
-        ) : (
-          events.map((event) => (
-            <div className="col-md-6 col-lg-4 mb-4" key={event._id}>
+  
+      {events.length === 0 ? (
+        <p className="text-center">No events found.</p>
+      ) : (
+        <div className="d-flex flex-column align-items-center">
+          {events.map((event) => (
+            <div
+              key={event._id}
+              className="mb-4"
+              style={{ width: "100%", maxWidth: "600px" }}
+            >
               <EventCard event={event} />
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
-  );
+  );  
 };
 
 export default Events;
