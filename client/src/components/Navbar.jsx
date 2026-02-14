@@ -51,7 +51,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarContent">
 
           {/* Center Search */}
-          <form className="d-flex mx-auto my-3 my-lg-0 w-100 w-lg-auto justify-content-center">
+          <form className="d-flex  mx-auto my-3 my-lg-0 w-100 w-lg-auto justify-content-center">
             <input
               className="form-control me-2 rounded-pill"
               type="search"
@@ -68,17 +68,48 @@ const Navbar = () => {
 
           {/* Right Side: User logged in */}
           {user ? (
-            <div className="d-flex flex-column flex-lg-row align-items-center ms-lg-auto text-center text-lg-start">
-              <span className="me-lg-3 fw-semibold text-white fs-4" style={{ whiteSpace: "nowrap" }}>Hii 👋🏿 {user.username}</span>
-              <button
-                className="btn btn-outline-light btn-sm rounded-pill fw-semibold mt-2 mt-lg-0"
-                onClick={handleLogout}
+            <div
+              className="d-flex align-items-center ms-auto gap-4"
+              style={{ whiteSpace: "nowrap" }}
+            >
+              <span className="fw-semibold text-white fs-5 m-0">
+                Hii 👋 {user.username}
+              </span>
+
+              <Link
+                to="/create"
+                className="text-white fs-4 nav-icon"
+                title="Create Event"
               >
-                Logout
+                <i className="fa-solid fa-plus"></i>
+              </Link>
+
+              <Link 
+                to="/"
+                className="text-white fs-4 nav-icon"
+                title="Home"
+              >
+                <i class="fas fa-home"></i>
+              </Link>
+
+              <Link
+                to="/profile"
+                className="text-white fs-4 nav-icon"
+                title="Profile"
+              >
+                <i className="fa-solid fa-user"></i>
+              </Link>
+
+              <button
+                onClick={handleLogout}
+                className="btn btn-outline-light btn-sm rounded-pill"
+                title="Logout"
+              >
+                <i className="fa-solid fa-right-from-bracket"></i>
               </button>
             </div>
-
           ) : (
+
             // Right Side: Not logged in
             <div className="ms-lg-auto mt-3 mt-lg-0">
               <Link
@@ -92,6 +123,17 @@ const Navbar = () => {
 
         </div>
       </div>
+      <style>
+        {`.nav-icon {
+  transition: 0.3s ease;
+}
+
+.nav-icon:hover {
+  color: #ffc107 !important;
+  transform: scale(1.2);
+}
+`}
+      </style>
     </nav>
   );
 };
