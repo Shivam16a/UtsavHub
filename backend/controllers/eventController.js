@@ -85,3 +85,27 @@ exports.getUserEvents = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// ================= DELETE EVENT =================
+exports.deleteEvent = async (req, res) => {
+  try {
+    if (!req.session.userId) {
+      return res.status(401).json({ message: "User not authenticated" });
+    }
+
+    const event = await Event.findOneAndDelete({
+      _id: req.params.id,
+      organizer: req.session.userId,
+    });
+
+    if (!event) {
+      return res.status(404).json({ message: "Event not found or not authorized" });
+    }
+
+    res.json({ message: "Event deleted successfully" });
+
+  } catch (error) {
+    console.error("Delete Event Error:", error);
+    res.status(500).json({ message: error.message });
+  }
+};

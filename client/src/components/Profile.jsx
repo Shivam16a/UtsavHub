@@ -50,6 +50,31 @@ const Profile = () => {
     }
   };
 
+  const handleDeleteEvent = async (eventId) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this event?");
+    if (!confirmDelete) return;
+
+    try {
+      const res = await fetch(`http://localhost:5650/api/events/delete/${eventId}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        // UI se turant remove karega
+        setEvents(events.filter((event) => event._id !== eventId));
+        alert("Event deleted successfully");
+      } else {
+        alert(data.message || "Delete failed");
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Network error");
+    }
+  };
+
   return (
     <div className="container mt-5">
       {/* Profile Header */}
@@ -99,9 +124,19 @@ const Profile = () => {
         <div className="row g-3">
           {events.map((event) => (
             <div key={event._id} className="col-12 col-sm-6 col-md-4 col-lg-3">
-              <EventCard event={event} />
+              <div className="position-relative">
+                <EventCard event={event} />
+
+                <button
+                  onClick={() => handleDeleteEvent(event._id)}
+                  className="btn btn-danger btn-sm position-absolute top-0 end-0 m-2"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
+
         </div>
       )}
 

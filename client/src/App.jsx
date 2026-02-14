@@ -8,14 +8,16 @@ import Login from './pases/Login'
 import Profile from './components/Profile'
 import EventDetails from './pases/EventDetails'
 import CreateEvent from './pases/CreateEvent'
+import Navbar from './components/Navbar'
 
 const App = () => {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/event/:id' element={<EventDetails/>}/>
-        <Route path='/create' element={<CreateEvent/>}/>
+        <Route path='/event/:id' element={<EventDetails />} />
+        <Route path='/create' element={<CreateEvent />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
