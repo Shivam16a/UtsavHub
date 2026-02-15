@@ -3,8 +3,8 @@ import { NavLink,Outlet } from "react-router-dom"
 const Admin = () => {
     return (
         <>
-            <div> <p>Admin</p>
-
+            <div> <p>Welcome!</p>
+                <NavLink to="users">Users</NavLink>
             <Outlet/>
             </div>
         </>

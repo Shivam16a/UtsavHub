@@ -10,6 +10,7 @@ import EventDetails from './pases/EventDetails'
 import CreateEvent from './pases/CreateEvent'
 import Navbar from './components/Navbar'
 import Admin from './components/Admin'
+import AllUsers from './components/AllUsers'
 
 const App = () => {
   return (
@@ -22,7 +23,9 @@ const App = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/admin' element={<Admin/>}/>
+        <Route path='/admin' element={<Admin />}>
+          <Route path='users' element={<AllUsers />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
