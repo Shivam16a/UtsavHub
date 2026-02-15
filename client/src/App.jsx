@@ -14,6 +14,7 @@ import AllUsers from './components/AllUsers'
 import About from './pases/About'
 import Footer from './components/Footer'
 import ErrorPage from './pases/ErrorPage'
+import AdminRoute from './components/AdminRoute'
 
 const App = () => {
   return (
@@ -24,12 +25,14 @@ const App = () => {
         <Route path='/event/:id' element={<EventDetails />} />
         <Route path='/create' element={<CreateEvent />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/error' element={<ErrorPage />} />
+        <Route path='*' element={<ErrorPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/about' element={<About />} />
-        <Route path='/admin' element={<Admin />}>
-          <Route path='users' element={<AllUsers />} />
+        <Route element={<AdminRoute />}>
+          <Route path='/admin' element={<Admin />}>
+            <Route path='users' element={<AllUsers />} />
+          </Route>
         </Route>
       </Routes>
       <Footer />
