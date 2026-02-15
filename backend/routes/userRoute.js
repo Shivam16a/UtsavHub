@@ -21,6 +21,9 @@ router.get('/me', isAuthenticated, userController.getMyProfile);
 // Admin: Get All Users
 router.get('/all', isAuthenticated, isAdmin, userController.getAllUsers);
 
+// Admin: Update User
+router.put('/:id', isAuthenticated, isAdmin, userController.adminUpdateUser);
+
 // Admin: Delete User
 router.delete('/:id', isAuthenticated, isAdmin, userController.deleteUser);
 

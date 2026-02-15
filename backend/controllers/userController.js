@@ -122,3 +122,25 @@ exports.deleteUser = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+// ================= ADMIN UPDATE USER =================
+exports.adminUpdateUser = async (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { returnDocument: "after" }
+        ).select("-password");
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        res.json({
+            message: "User updated successfully",
+            updatedUser
+        });
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
