@@ -23,7 +23,6 @@ const Navbar = () => {
     setUser(null);
     navigate("/login");
   };
-  console.log(user);
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark"
@@ -75,6 +74,13 @@ const Navbar = () => {
               <span className="fw-semibold text-white fs-5 m-0">
                 Hii 👋 {user.username}
               </span>
+              <Link
+                to="/"
+                className="text-white fs-4 nav-icon"
+                title="Home"
+              >
+                <i className="fas fa-home"></i>
+              </Link>
 
               <Link
                 to="/create"
@@ -83,14 +89,14 @@ const Navbar = () => {
               >
                 <i className="fa-solid fa-plus"></i>
               </Link>
-
               <Link
-                to="/"
+                to="/about"
                 className="text-white fs-4 nav-icon"
-                title="Home"
+                title="About Us"
               >
-                <i className="fas fa-home"></i>
+                <i className="fas fa-address-card"></i>
               </Link>
+
               {user.role === 'admin' ? (
                 <Link
                   to="/admin"

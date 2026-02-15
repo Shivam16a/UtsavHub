@@ -80,16 +80,22 @@ const Profile = () => {
       {/* Profile Header */}
       <div className="row align-items-center mb-5">
         <div className="col-12 col-md-4 text-center mb-3 mb-md-0">
-          <img
-            src={
-              user.profilepic
-                ? `http://localhost:5650/uploads/${user.profilepic}`
-                : ""
-            }
-            alt="profile"
-            className="rounded-circle img-fluid"
-            style={{ width: "150px", height: "150px", objectFit: "cover" }}
-          />
+          {user.profilepic ? (
+            <img
+              src={`http://localhost:5650/uploads/${user.profilepic}`}
+              alt="profile"
+              className="rounded-circle img-fluid"
+              style={{ width: "150px", height: "150px", objectFit: "cover" }}
+            />
+          ) : (
+            <img
+              src="/images/default-profile.png"
+              alt="profile placeholder"
+              className="rounded-circle img-fluid"
+              style={{ width: "150px", height: "150px", objectFit: "cover" }}
+            />
+          )}
+
         </div>
         <div className="col-12 col-md-8">
           <div className="d-flex flex-column flex-md-row align-items-md-center gap-3">

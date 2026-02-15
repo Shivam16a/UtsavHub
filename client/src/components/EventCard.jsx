@@ -4,15 +4,14 @@ import CommentSection from "./CommentSection";
 
 const EventCard = ({ event }) => {
   const [showComments, setShowComments] = useState(false);
-
   return (
     <div className="card h-100 shadow-sm">
       {event.bannerImage && (
         <img
           src={`http://localhost:5650/uploads/${event.bannerImage}`}
           className="card-img-top"
-          alt={event.title}
-          style={{ objectFit: "cover", height: "400px", backgroundPosition:"center" }}
+          alt={event.title || "Event Banner"}
+          style={{ objectFit: "cover", height: "400px", backgroundPosition: "center" }}
         />
       )}
 
@@ -30,8 +29,11 @@ const EventCard = ({ event }) => {
         </p>
 
         <p className="card-text mb-2">
-          <strong>Organizer:</strong> {event.organizer?.username || "Unknown"}
+          <strong>Organizer:</strong> {event.organizer && typeof event.organizer === "object"
+            ? event.organizer.username
+            : "Unknown"}
         </p>
+
 
         {/* Show More / Less Button */}
         <button

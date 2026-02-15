@@ -11,6 +11,8 @@ import CreateEvent from './pases/CreateEvent'
 import Navbar from './components/Navbar'
 import Admin from './components/Admin'
 import AllUsers from './components/AllUsers'
+import About from './pases/About'
+import Footer from './components/Footer'
 
 const App = () => {
   return (
@@ -23,10 +25,12 @@ const App = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/about' element={<About />} />
         <Route path='/admin' element={<Admin />}>
           <Route path='users' element={<AllUsers />} />
         </Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
