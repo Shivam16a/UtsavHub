@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; // ✅ AuthContext se
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth(); // global login function
 
   const [formData, setFormData] = useState({
     prn: "",
@@ -30,20 +32,19 @@ const Login = () => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.message);
 
-      localStorage.setItem("user", JSON.stringify(data.user));
-      // setUser(data.user);
+      // ✅ Update global auth state & localStorage
+      login(data.user);
 
-      alert("Login Successful ✅");
-      navigate("/"); // Redirect after login
+      // ✅ Navigate immediately
+      navigate("/");
+
     } catch (err) {
       setError(err.message);
     }
   };
 
   return (
-    <div
-      className="d-flex justify-content-center align-items-center vh-100"
-    >
+    <div className="d-flex justify-content-center align-items-center vh-100">
       <div className="card shadow-lg p-5 rounded-4 col-11 col-md-6 col-lg-4">
         <h2 className="text-center mb-4 fw-bold text-dark">उत्सवHub Login</h2>
 
@@ -90,7 +91,7 @@ const Login = () => {
 
         <p className="text-center mt-3 text-dark">
           Don't have an account?{" "}
-          <Link to={"/register"} className="text-warning text-decoration-none">
+          <Link to="/register" className="text-warning text-decoration-none">
             Register
           </Link>
         </p>

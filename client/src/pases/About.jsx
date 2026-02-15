@@ -28,14 +28,14 @@ const About = () => {
     {
       name: "Rahul Kumar",
       role: "Member",
-      img: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+      img: "/public/Rahul.jpeg",
       description:
         "Developed admin dashboard and analytics features.",
     },
     {
       name: "Aman Kumar",
       role: "Member",
-      img: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+      img: "/public/Aman2.jpeg",
       description:
         "Implemented notification system and routes security.",
     },
