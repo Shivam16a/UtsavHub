@@ -13,6 +13,7 @@ import Admin from './components/Admin'
 import AllUsers from './components/AllUsers'
 import About from './pases/About'
 import Footer from './components/Footer'
+import ErrorPage from './pases/ErrorPage'
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path='/event/:id' element={<EventDetails />} />
         <Route path='/create' element={<CreateEvent />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/error' element={<ErrorPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/about' element={<About />} />

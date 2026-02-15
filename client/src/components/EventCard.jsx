@@ -31,7 +31,7 @@ const EventCard = ({ event }) => {
         <p className="card-text mb-2">
           <strong>Organizer:</strong> {event.organizer && typeof event.organizer === "object"
             ? event.organizer.username
-            : "Unknown"}
+            : "you"}
         </p>
 
 

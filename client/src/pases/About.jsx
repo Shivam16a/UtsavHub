@@ -1,9 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 
 const About = () => {
+  const [expanded, setExpanded] = useState(null);
+
+  const teamMembers = [
+    {
+      name: "Rishi Kumar",
+      role: "Project Leader",
+      img: "/public/Rishi.jpeg",
+      description:
+        "Handled complete project architecture, backend integration, and deployment coordination.",
+    },
+    {
+      name: "Aman Kumar",
+      role: "Member",
+      img: "/public/Aman.jpeg",
+      description:
+        "Worked on frontend UI design, authentication system, and API integration.",
+    },
+    {
+      name: "Kartik Kumar Mandal",
+      role: "Member",
+      img: "/public/kartik.jpeg",
+      description:
+        "Managed database schema design and backend route handling.",
+    },
+    {
+      name: "Rahul Kumar",
+      role: "Member",
+      img: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+      description:
+        "Developed admin dashboard and analytics features.",
+    },
+    {
+      name: "Aman Kumar",
+      role: "Member",
+      img: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
+      description:
+        "Implemented notification system and routes security.",
+    },
+  ];
+
   return (
     <div className="container py-5">
-      
+
       {/* Header Section */}
       <div className="text-center mb-5">
         <h1 className="fw-bold display-5">About Event Management System</h1>
@@ -16,9 +56,9 @@ const About = () => {
       <div className="row align-items-center mb-5">
         <div className="col-md-6 mb-4 mb-md-0">
           <img
-            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+            src="/public/Rishi.jpeg"
             alt="event"
-            className="img-fluid rounded shadow"
+            className="img-fluid rounded-circle shadow"
             style={{ opacity: "0.9", transition: "0.4s" }}
           />
         </div>
@@ -44,14 +84,12 @@ const About = () => {
           Key Features
         </h3>
 
-        <div className="row g-4">
+        <div className="row g-4 d-flex justify-content-center">
           {[
             { icon: "fa-user-shield", text: "Secure Authentication" },
             { icon: "fa-calendar-plus", text: "Event Creation & Management" },
             { icon: "fa-ticket", text: "Online Registration" },
             { icon: "fa-chart-line", text: "Admin Analytics Dashboard" },
-            { icon: "fa-bell", text: "Notifications System" },
-            { icon: "fa-credit-card", text: "Payment Integration" },
           ].map((feature, index) => (
             <div key={index} className="col-12 col-sm-6 col-lg-4">
               <div
@@ -108,6 +146,54 @@ const About = () => {
           Our goal is to provide a smart, user-friendly, and efficient digital
           platform that enhances event participation and simplifies management.
         </p>
+      </div>
+      {/* Team Section */}
+      <div className="mb-5">
+        <h3 className="fw-semibold text-center mb-4">
+          <i className="fa-solid fa-users me-2 text-primary"></i>
+          Our Team
+        </h3>
+
+        <div className="row g-4 d-flex justify-content-center">
+          {teamMembers.map((member, index) => (
+            <div key={index} className="col-12 col-sm-6 col-lg-4">
+              <div className="card h-100 shadow-sm border-0 text-center p-4 team-card">
+                <img
+                  src={member.img}
+                  alt={member.name}
+                  className="rounded-circle mb-3"
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    objectFit: "cover",
+                    margin: "0 auto",
+                  }}
+                />
+
+                <h5 className="fw-bold">{member.name}</h5>
+                <p className="text-muted">{member.role}</p>
+
+                {/* Description */}
+                <p className="text-muted">
+                  {expanded === index
+                    ? member.description
+                    : member.description.substring(0, 40) + "..."}
+                </p>
+
+                {/* Toggle Button */}
+                <button
+                  className="btn btn-sm btn-outline-primary"
+                  onClick={() =>
+                    setExpanded(expanded === index ? null : index)
+                  }
+                >
+                  {expanded === index ? "Show Less" : "Read More"}
+                </button>
+
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
     </div>

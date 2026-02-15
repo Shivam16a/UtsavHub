@@ -30,6 +30,7 @@ const Login = () => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.message);
 
+      localStorage.setItem("user", JSON.stringify(data.user));
       // setUser(data.user);
 
       alert("Login Successful ✅");

@@ -9,6 +9,16 @@ body {
     --main-text-color: #a8ffef;
 }
 
+.team-card {
+    transition: 0.4s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+
 .text-main {
     color: var(--main-text-color);
 }
