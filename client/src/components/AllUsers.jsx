@@ -1,33 +1,41 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from "react-router-dom";
 
 const AllUsers = () => {
 
   const [users, setUsers] = useState([])
   const [editingUser, setEditingUser] = useState(null)
+  const location = useLocation();
+  const query = new URLSearchParams(location.search).get("search");
 
   // ================= FETCH USERS =================
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://localhost:5650/api/users/all", {
-        method: "GET",
-        credentials: "include"
-      })
+      let url = "http://localhost:5650/api/users/all";
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch users")
+      // 🔥 Agar query present hai, to search route call karo
+      if (query) {
+        url = `http://localhost:5650/api/users/search?query=${query}`;
       }
 
-      const data = await response.json()
-      setUsers(data)
+      const response = await fetch(url, { method: "GET", credentials: "include" });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch users");
+      }
+
+      const data = await response.json();
+      setUsers(data);
 
     } catch (error) {
-      console.error("Error fetching users:", error)
+      console.error("Error fetching users:", error);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchUsers()
-  }, [])
+    fetchUsers();
+  }, [query]); 
+  
 
   // ================= DELETE USER =================
   const deleteUser = async (id) => {

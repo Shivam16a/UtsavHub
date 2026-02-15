@@ -80,7 +80,7 @@ const About = () => {
       {/* Features Section */}
       <div className="mb-5">
         <h3 className="fw-semibold text-center mb-4">
-          <i className="fa-solid fa-rocket me-2 text-success"></i>
+          <i className="fa-solid fa-rocket me-2 text-warning"></i>
           Key Features
         </h3>
 
@@ -111,6 +111,10 @@ const About = () => {
 
       {/* Technology Stack */}
       <div className="row mb-5">
+        <h3 className="fw-semibold text-center mb-4">
+          <i className="fa-solid fa-lg fas fa-wrench me-2 text-warning"></i>
+          Used Technology
+        </h3>
         <div className="col-md-4 mb-4">
           <div className="card shadow-sm p-4 text-center tech-card">
             <i className="fa-brands fab fa-react fa-2x text-info mb-3"></i>

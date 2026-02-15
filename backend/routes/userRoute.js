@@ -21,6 +21,9 @@ router.get('/me', isAuthenticated, userController.getMyProfile);
 // Admin: Get All Users
 router.get('/all', isAuthenticated, isAdmin, userController.getAllUsers);
 
+// ✅ Admin: Search Users (ADD THIS HERE)
+router.get('/search', isAuthenticated, isAdmin, userController.searchUsers);
+
 // Admin: Update User
 router.put('/:id', isAuthenticated, isAdmin, userController.adminUpdateUser);
 

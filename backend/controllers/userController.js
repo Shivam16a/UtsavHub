@@ -144,3 +144,34 @@ exports.adminUpdateUser = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+// ================= SEARCH USERS (ADMIN) =================
+exports.searchUsers = async (req, res) => {
+    try {
+        // Check admin
+        if (!req.session.userId || !req.session.isAdmin) {
+            return res.status(403).json({ message: "Access denied. Admin only." });
+        }
+
+        const { query } = req.query;
+
+        if (!query) {
+            return res.status(400).json({ message: "Search query is required" });
+        }
+
+        const users = await User.find({
+            $or: [
+                { username: { $regex: query, $options: "i" } },
+                { email: { $regex: query, $options: "i" } },
+                { prn: { $regex: query, $options: "i" } },
+                { phone: { $regex: query, $options: "i" } },
+            ]
+        }).select("-password");
+
+        res.json(users);
+
+    } catch (error) {
+        console.error("Search Users Error:", error);
+        res.status(500).json({ message: error.message });
+    }
+};

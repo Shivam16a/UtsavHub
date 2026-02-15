@@ -34,11 +34,11 @@ const Footer = () => {
             <h6 className="fw-semibold mb-3">Contact</h6>
             <p className="small mb-1">
               <i className="fa-solid fa-envelope me-2 text-main"></i>
-              support@ems.com
+              utsavhub@ems.com
             </p>
             <p className="small mb-3">
               <i className="fa-solid fa-phone me-2 text-main"></i>
-              +91 98765 43210
+              +91 97987 59482
             </p>
 
             <div className="social-icons">

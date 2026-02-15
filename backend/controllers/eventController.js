@@ -109,3 +109,29 @@ exports.deleteEvent = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// ================= SEARCH EVENTS =================
+exports.searchEvents = async (req, res) => {
+  try {
+    const { query } = req.query;
+
+    if (!query) {
+      return res.status(400).json({ message: "Search query is required" });
+    }
+
+    const events = await Event.find({
+      $or: [
+        { title: { $regex: query, $options: "i" } },
+        { description: { $regex: query, $options: "i" } },
+        { venue: { $regex: query, $options: "i" } },
+      ],
+    })
+      .populate("organizer", "username profilepic")
+      .sort({ createdAt: -1 });
+
+    res.json(events);
+  } catch (error) {
+    console.error("Search Events Error:", error);
+    res.status(500).json({ message: error.message });
+  }
+};

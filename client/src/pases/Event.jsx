@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
+import { useLocation } from "react-router-dom";
+
 
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState("");
+  const location = useLocation();
+  const query = new URLSearchParams(location.search).get("search");
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch("http://localhost:5650/api/events", {
-          credentials: "include",
-        });
+        let url = query
+          ? `http://localhost:5650/api/events/search?query=${query}`
+          : "http://localhost:5650/api/events";
+
+        const res = await fetch(url, { credentials: "include" });
         const data = await res.json();
+        setEvents(Array.isArray(data) ? data : []);
+
 
         if (res.ok) {
           setEvents(Array.isArray(data) ? data : []);
@@ -24,14 +32,15 @@ const Events = () => {
     };
 
     fetchEvents();
-  }, []);
+  }, [query]); // 🔑 query add karna zaruri
+
 
   if (error) return <div className="alert alert-danger">{error}</div>;
 
   return (
     <div className="container py-5">
       <h2 className="mb-4 text-center">All Events</h2>
-  
+
       {events.length === 0 ? (
         <p className="text-center">No events found.</p>
       ) : (
@@ -48,7 +57,7 @@ const Events = () => {
         </div>
       )}
     </div>
-  );  
+  );
 };
 
 export default Events;
