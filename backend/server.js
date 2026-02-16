@@ -5,6 +5,7 @@ const session = require('express-session');
 const userRoute = require('./routes/userRoute.js');
 const eventRoutes = require('./routes/eventRoute.js');
 const commentRoutes = require('./routes/commentRoute.js');
+const enentRegisterRoute = require('./routes/registrationRoutes.js');
 const cors = require('cors');
 
 dotenv.config();
@@ -27,6 +28,7 @@ app.use('/api/users', userRoute);
 app.use("/uploads", express.static("uploads"));
 app.use("/api/events", eventRoutes);
 app.use("/api/comments", commentRoutes);
+app.use("/api/eventregister",enentRegisterRoute);
 
 
 
