@@ -1,19 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const CommentSection = ({ eventId }) => {
   const [comments, setComments] = useState([]);
   const [text, setText] = useState("");
+  const containerRef = useRef(null);
 
   useEffect(() => {
     fetchComments();
-  }, [eventId]); // important change
+  }, [eventId]);
 
   const fetchComments = () => {
     fetch(`http://localhost:5650/api/comments/${eventId}`, {
       credentials: "include",
     })
       .then(res => res.json())
-      .then(data => setComments(data));
+      .then(data => {
+        setComments(data);
+        // auto scroll to bottom
+        setTimeout(() => {
+          containerRef.current?.scrollTo({
+            top: containerRef.current.scrollHeight,
+            behavior: "smooth",
+          });
+        }, 100);
+      });
   };
 
   const handleSubmit = (e) => {
@@ -53,15 +63,14 @@ const CommentSection = ({ eventId }) => {
         </button>
       </form>
 
-      {comments.length === 0 && (
-        <p className="text-muted">No comments yet</p>
-      )}
-
-      {comments.map(comment => (
-        <div key={comment._id} className="mb-1">
-          <strong>{comment.user.username}</strong>: {comment.text}
-        </div>
-      ))}
+      <div className="comment-container" ref={containerRef}>
+        {comments.length === 0 && <p className="text-muted">No comments yet</p>}
+        {comments.map(comment => (
+          <div key={comment._id} className="mb-1">
+            <strong>{comment.user.username}</strong>: {comment.text}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

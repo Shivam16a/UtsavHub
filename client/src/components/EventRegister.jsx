@@ -20,7 +20,7 @@ const EventRegister = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include", // session cookie ke liye important
+          credentials: "include", 
           body: JSON.stringify({ eventId: id }),
         }
       );
