@@ -14,12 +14,18 @@ const Admin = () => {
 
                     <ul className="nav flex-column">
                         <li className="nav-item">
-                            <NavLink 
-                                to="users" 
+                            <NavLink
+                                to="users"
                                 className="nav-link text-white"
                             >
                                 <i className="fa-solid fa-users me-2"></i>
                                 Manage Users
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to="alleventorganizer" className="nav-link text-white">
+                                <i className="fas fa-sitemap me-2"></i>
+                                All Event Organizer
                             </NavLink>
                         </li>
                     </ul>

@@ -15,6 +15,7 @@ import Footer from './components/Footer'
 import ErrorPage from './pases/ErrorPage'
 import AdminRoute from './components/AdminRoute'
 import PrivateRoute from './components/PrivateRoute'
+import EventOrganizer from './components/EventOrganizer'
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
           <Route element={<AdminRoute />}>
             <Route path='/admin' element={<Admin />}>
               <Route path='users' element={<AllUsers />} />
+              <Route path='alleventorganizer' element={<EventOrganizer/>}/>
             </Route>
           </Route>
         </Route>

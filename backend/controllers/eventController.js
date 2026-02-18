@@ -40,7 +40,7 @@ exports.createEvent = async (req, res) => {
 exports.getAllEvents = async (req, res) => {
   try {
     const events = await Event.find()
-      .populate("organizer", "username profilepic") // correct field
+      .populate("organizer", "username email profilepic") // correct field
       .sort({ createdAt: -1 });
 
     res.json(events);
