@@ -50,8 +50,8 @@ const Navbar = () => {
       style={{ background: "linear-gradient(90deg, #134e5e 0%, #71b280 100%)" }}
     >
       <div className="container-fluid">
-        <Link className="navbar-brand fw-bold text-warning fs-2" to="/">उत्सवHub</Link>
-
+        <Link className="navbar-brand fw-bold text-warning fs-2" to="/">EventSphere</Link>
+{/* उत्सवHub */}
         <button
           className="navbar-toggler"
           type="button"

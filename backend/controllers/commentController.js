@@ -1,4 +1,4 @@
-const Comment = require("../models/Comment.js");
+const Comment = require('../models/Comment.js');
 
 // Add comment
 exports.addComment = async (req, res) => {
@@ -19,7 +19,7 @@ exports.addComment = async (req, res) => {
 exports.getEventComments = async (req, res) => {
   try {
     const comments = await Comment.find({ event: req.params.eventId })
-      .populate("user", "username profilepic")
+      .populate('user', 'username profilepic')
       .sort({ createdAt: -1 });
 
     res.json(comments);

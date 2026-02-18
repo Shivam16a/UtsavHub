@@ -24,16 +24,16 @@ const userSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        enum: ["male", "female"],
+        enum: ['male', 'female'],
     },
     description: {
         type: String,
-        default: ""
+        default: ''
     },
     role: {
         type: String,
-        enum: ["user", "admin"],
-        default: "user"
+        enum: ['user', 'admin'],
+        default: 'user'
     }
     ,
     password: {

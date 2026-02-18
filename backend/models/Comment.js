@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const commentSchema = new mongoose.Schema({
     event: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Event",
+        ref: 'Event',
         required: true
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: 'User',
         required: true
     },
     text: {
@@ -17,4 +17,4 @@ const commentSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-module.exports = mongoose.model("Comment", commentSchema);
+module.exports = mongoose.model('Comment', commentSchema);

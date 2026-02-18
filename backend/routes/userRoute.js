@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController.js');
 const { isAuthenticated, isAdmin } = require('../middleware/authMiddleware.js');
-const upload = require("../middleware/multer.js");
+const upload = require('../middleware/multer.js');
 
 // Register
 // userRoute.js
-router.post("/register", upload.single("profilepic"), userController.registerUser);
+router.post('/register', upload.single('profilepic'), userController.registerUser);
 
 
 // Login

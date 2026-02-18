@@ -52,6 +52,7 @@ const CreateEvent = () => {
       }
     } catch (err) {
       setError("Network error, please try again.");
+      console.log(err);
     }
   };
 

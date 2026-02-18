@@ -14,7 +14,7 @@ exports.registerUser = async (req, res) => {
 
         const existingUser = await User.findOne({ prn });
         if (existingUser) {
-            return res.status(400).json({ message: "User already exists with this PRN" });
+            return res.status(400).json({ message: 'User already exists with this PRN' });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -30,7 +30,7 @@ exports.registerUser = async (req, res) => {
             password: hashedPassword
         });
 
-        res.status(201).json({ message: "User registered successfully", user });
+        res.status(201).json({ message: 'User registered successfully', user });
 
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -43,25 +43,25 @@ exports.loginUser = async (req, res) => {
     try {
         const { prn, password } = req.body;
 
-        const user = await User.findOne({ prn }).select("+password");
+        const user = await User.findOne({ prn }).select('+password');
         if (!user) {
-            return res.status(400).json({ message: "Invalid Credentials" });
+            return res.status(400).json({ message: 'Invalid Credentials' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: "Invalid Credentials" });
+            return res.status(400).json({ message: 'Invalid Credentials' });
         }
 
         // Save user in session
         req.session.userId = user._id;
-        req.session.isAdmin = user.role === "admin";
+        req.session.isAdmin = user.role === 'admin';
 
         const userObj = user.toObject();
         delete userObj.password;
 
         res.json({
-            message: "Login successful",
+            message: 'Login successful',
             user: userObj
         });
 
@@ -82,7 +82,7 @@ exports.updateProfile = async (req, res) => {
         );
 
         res.json({
-            message: "Profile updated successfully",
+            message: 'Profile updated successfully',
             updatedUser
         });
 
@@ -94,7 +94,7 @@ exports.updateProfile = async (req, res) => {
 // ================= GET PERSONAL USER =================
 exports.getMyProfile = async (req, res) => {
     try {
-        const user = await User.findById(req.session.userId).select("-password");
+        const user = await User.findById(req.session.userId).select('-password');
 
         res.json(user);
 
@@ -106,7 +106,7 @@ exports.getMyProfile = async (req, res) => {
 // ================= GET ALL USERS (ADMIN) =================
 exports.getAllUsers = async (req, res) => {
     try {
-        const users = await User.find().select("-password");
+        const users = await User.find().select('-password');
         res.json(users);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -117,7 +117,7 @@ exports.getAllUsers = async (req, res) => {
 exports.deleteUser = async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
-        res.json({ message: "User deleted successfully" });
+        res.json({ message: 'User deleted successfully' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -128,15 +128,15 @@ exports.adminUpdateUser = async (req, res) => {
         const updatedUser = await User.findByIdAndUpdate(
             req.params.id,
             req.body,
-            { returnDocument: "after" }
-        ).select("-password");
+            { returnDocument: 'after' }
+        ).select('-password');
 
         if (!updatedUser) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(404).json({ message: 'User not found' });
         }
 
         res.json({
-            message: "User updated successfully",
+            message: 'User updated successfully',
             updatedUser
         });
 
@@ -150,28 +150,28 @@ exports.searchUsers = async (req, res) => {
     try {
         // Check admin
         if (!req.session.userId || !req.session.isAdmin) {
-            return res.status(403).json({ message: "Access denied. Admin only." });
+            return res.status(403).json({ message: 'Access denied. Admin only.' });
         }
 
         const { query } = req.query;
 
         if (!query) {
-            return res.status(400).json({ message: "Search query is required" });
+            return res.status(400).json({ message: 'Search query is required' });
         }
 
         const users = await User.find({
             $or: [
-                { username: { $regex: query, $options: "i" } },
-                { email: { $regex: query, $options: "i" } },
-                { prn: { $regex: query, $options: "i" } },
-                { phone: { $regex: query, $options: "i" } },
+                { username: { $regex: query, $options: 'i' } },
+                { email: { $regex: query, $options: 'i' } },
+                { prn: { $regex: query, $options: 'i' } },
+                { phone: { $regex: query, $options: 'i' } },
             ]
-        }).select("-password");
+        }).select('-password');
 
         res.json(users);
 
     } catch (error) {
-        console.error("Search Users Error:", error);
+        console.error('Search Users Error:', error);
         res.status(500).json({ message: error.message });
     }
 };

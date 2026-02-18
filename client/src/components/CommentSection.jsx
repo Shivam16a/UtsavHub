@@ -6,16 +6,16 @@ const CommentSection = ({ eventId }) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    fetchComments();
-  }, [eventId]);
+    const fetchComments = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:5650/api/comments/${eventId}`,
+          { credentials: "include" }
+        );
 
-  const fetchComments = () => {
-    fetch(`http://localhost:5650/api/comments/${eventId}`, {
-      credentials: "include",
-    })
-      .then(res => res.json())
-      .then(data => {
+        const data = await res.json();
         setComments(data);
+
         // auto scroll to bottom
         setTimeout(() => {
           containerRef.current?.scrollTo({
@@ -23,8 +23,14 @@ const CommentSection = ({ eventId }) => {
             behavior: "smooth",
           });
         }, 100);
-      });
-  };
+
+      } catch (err) {
+        console.error("Error fetching comments:", err);
+      }
+    };
+
+    fetchComments();
+  }, [eventId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,11 +45,18 @@ const CommentSection = ({ eventId }) => {
       credentials: "include",
       body: JSON.stringify({ text }),
     })
-      .then(res => res.json())
-      .then(() => {
+      .then((newComment) => {
         setText("");
-        fetchComments();
+        setComments(prev => [...prev, newComment]);
+
+        setTimeout(() => {
+          containerRef.current?.scrollTo({
+            top: containerRef.current.scrollHeight,
+            behavior: "smooth",
+          });
+        }, 100);
       });
+
   };
 
   return (

@@ -60,7 +60,7 @@ const Register = () => {
 
   return (
     <div
-      className="d-flex justify-content-center align-items-center vh-100 px-3"
+      className="d-flex justify-content-center align-items-center vh-100 px-3 mt-5"
     >
       <div className="card p-4 rounded-4 shadow-lg col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
         <h2 className="text-center mb-4 fw-bold text-dark">उत्सवHub Register</h2>

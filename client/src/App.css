@@ -1,9 +1,40 @@
 body {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    position: relative;
+    margin: 0;
+    min-height: 100vh;
     color: #a8ffef;
-    background-size: cover;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    font-family: sans-serif;
+    overflow-x: hidden;
 }
+
+/* Background image container */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("/public/back.jpeg") no-repeat center center / cover;
+    filter: blur(8px);
+    /* blur amount */
+    z-index: -2;
+}
+
+/* Semi-transparent overlay for better contrast */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    /* dark overlay */
+    z-index: -1;
+}
+
 
 :root {
     --main-text-color: #a8ffef;

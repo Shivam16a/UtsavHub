@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useLocation } from "react-router-dom";
 
 const AllUsers = () => {
@@ -9,7 +9,8 @@ const AllUsers = () => {
   const query = new URLSearchParams(location.search).get("search");
 
   // ================= FETCH USERS =================
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
+
     try {
       let url = "http://localhost:5650/api/users/all";
 
@@ -30,11 +31,11 @@ const AllUsers = () => {
     } catch (error) {
       console.error("Error fetching users:", error);
     }
-  };
+  },[query]);
 
   useEffect(() => {
     fetchUsers();
-  }, [query]); 
+  }, [fetchUsers]); 
   
 
   // ================= DELETE USER =================
