@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: '*'||'https://eventsphere-flame.vercel.app',
+    origin: 'https://eventsphere-flame.vercel.app'||'*',
     credentials: true
 }));
 
@@ -21,8 +21,13 @@ app.use(session({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false }
+    cookie: { 
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        sameSite: "none"
+    }
 }));
+
 
 app.use('/api/users', userRoute);
 app.use('/uploads', express.static('uploads'));
