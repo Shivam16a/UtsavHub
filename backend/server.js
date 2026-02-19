@@ -32,7 +32,7 @@ app.use('/api/eventregister',enentRegisterRoute);
 
 
 
-const PORT = process.env.PORT || 5052;
+const PORT = process.env.PORT || 5650;
 app.listen(PORT, () => {
     console.log(`server is running on port:${PORT}`);
     connectDB();

@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { user, logout, loading } = useAuth(); 
+  const { user, logout, loading } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [lastSearchType, setLastSearchType] = useState(null); // "users" | "events"
 
@@ -16,19 +16,19 @@ const Navbar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     const query = searchQuery.trim();
-  
+
     if (user?.role === "admin") {
       // Decide search type for admin
       const searchType = query.startsWith("@") ? "users" : "events";
       setLastSearchType(searchType);
-  
+
       if (!query) {
         // Show all based on last search type
         if (lastSearchType === "users") navigate("/admin/users");
-        else navigate("/"); // events
+        else navigate("/upcommingevents"); // events
         return;
       }
-  
+
       if (searchType === "users") navigate(`/admin/users?search=${query.slice(1)}`);
       else navigate(`/?search=${query}`);
     } else {
@@ -40,7 +40,7 @@ const Navbar = () => {
       }
       navigate(`/?search=${query}`);
     }
-  
+
     setSearchQuery("");
   };
 
@@ -51,7 +51,7 @@ const Navbar = () => {
     >
       <div className="container-fluid">
         <Link className="navbar-brand fw-bold text-warning fs-2" to="/">EventSphere</Link>
-{/* उत्सवHub */}
+        {/* उत्सवHub */}
         <button
           className="navbar-toggler"
           type="button"
@@ -62,8 +62,8 @@ const Navbar = () => {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarContent">
-          <form 
-            onSubmit={handleSearch} 
+          <form
+            onSubmit={handleSearch}
             className="d-flex mx-auto my-3 my-lg-0 w-100 w-lg-auto justify-content-center"
           >
             <input
@@ -86,6 +86,7 @@ const Navbar = () => {
             <div className="d-flex align-items-center ms-auto gap-4" style={{ whiteSpace: "nowrap" }}>
               <span className="fw-semibold text-white fs-5 m-0">Hii 👋 {user.username}</span>
               <Link to="/" className="text-white fs-4 nav-icon" title="Home"><i className="fas fa-home"></i></Link>
+              <Link to="/upcommingevents" className="text-white fs-4 nav-icon" title="Events"><i className="fas fa-calendar-alt"></i></Link>
               <Link to="/create" className="text-white fs-4 nav-icon" title="Create Event"><i className="fa-solid fa-plus"></i></Link>
               <Link to="/about" className="text-white fs-4 nav-icon" title="About Us"><i className="fas fa-address-card"></i></Link>
               {user.role === "admin" && <Link to="/admin" className="text-white fs-4 nav-icon" title="Admin"><i className="fas fa-user-shield"></i></Link>}

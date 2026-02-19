@@ -1,10 +1,10 @@
 import React from 'react'
-import Events from './Event'
+import MemoryEvent from '../components/MemoryEvent'
 
 const Home = () => {
   return (
     <>
-        <Events/>
+        <MemoryEvent/>
     </>
   )
 }

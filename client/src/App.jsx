@@ -16,6 +16,7 @@ import ErrorPage from './pases/ErrorPage'
 import AdminRoute from './components/AdminRoute'
 import PrivateRoute from './components/PrivateRoute'
 import EventOrganizer from './components/EventOrganizer'
+import Event from './pases/Event'
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/create' element={<CreateEvent />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/upcommingevents' element={<Event/>}/>
           <Route path='/about' element={<About />} />
           <Route element={<AdminRoute />}>
             <Route path='/admin' element={<Admin />}>
