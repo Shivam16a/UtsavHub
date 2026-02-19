@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="col-md-4 mb-4">
             <h5 className="fw-bold fs-3 text-warning">
               {/* <i className="fa-solid fa-calendar-check me-2 text-primary"></i> */}
-              उत्सवHub
+              EventSphere
             </h5>
             <p className="text-main small">
               A smart web-based platform to manage and organize college events 

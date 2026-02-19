@@ -14,7 +14,7 @@ const About = () => {
     {
       name: "Aman Kumar",
       role: "Member",
-      img: "/public/Aman.jpeg",
+      img: "/public/Aman3.jpeg",
       description:
         "Worked on frontend UI design, authentication system, and API integration.",
     },
