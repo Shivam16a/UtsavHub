@@ -200,7 +200,7 @@ const Profile = () => {
       {/* ================= USER EVENTS ================= */}
       <h4 className="text-light mb-3">My Events</h4>
 
-      {events.length === 0 ? (
+      {!Array.isArray(events) || events.length === 0 ? (
         <p className="text-light">
           You haven't posted any events yet.
         </p>
@@ -223,7 +223,7 @@ const Profile = () => {
                   <div className="mt-2 p-2 border rounded bg-light text-dark">
                     <strong>Registrations:</strong>
 
-                    {registrations[event._id]?.length > 0 ? (
+                    {Array.isArray(registrations[event._id]) && registrations[event._id].length > 0 ? (
                       <ul className="list-group list-group-flush">
                         {registrations[event._id].map(reg => (
                           <li key={reg._id} className="list-group-item">
