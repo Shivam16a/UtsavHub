@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
+import {useAuth} from "../context/AuthContext";
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -8,13 +9,14 @@ const Profile = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
+  const {API} = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Fetch user
         const resUser = await fetch(
-          "http://localhost:5650/api/users/me",
+          `${API}/api/users/me`,
           { credentials: "include" }
         );
         const userData = await resUser.json();
@@ -23,7 +25,7 @@ const Profile = () => {
 
         // Fetch events
         const resEvents = await fetch(
-          "http://localhost:5650/api/events/my",
+          `${API}/api/events/my`,
           { credentials: "include" }
         );
         const eventData = await resEvents.json();
@@ -33,7 +35,7 @@ const Profile = () => {
         if (eventData && eventData.length > 0) {
           for (const event of eventData) {
             const resReg = await fetch(
-              `http://localhost:5650/api/eventregister/event/${event._id}`,
+              `${API}/api/eventregister/event/${event._id}`,
               { credentials: "include" }
             );
             const regs = await resReg.json();
@@ -68,7 +70,7 @@ const Profile = () => {
 
     try {
       const res = await fetch(
-        "http://localhost:5650/api/users/update",
+        `${API}/api/users/update`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -99,7 +101,7 @@ const Profile = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:5650/api/events/delete/${eventId}`,
+        `${API}/api/events/delete/${eventId}`,
         {
           method: "DELETE",
           credentials: "include"
@@ -130,7 +132,7 @@ const Profile = () => {
           <img
             src={
               user.profilepic
-                ? `http://localhost:5650/uploads/${user.profilepic}`
+                ? `${API}/uploads/${user.profilepic}`
                 : "/images/default-profile.png"
             }
             alt="profile"

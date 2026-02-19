@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate,Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
   const navigate = useNavigate();
+  const {API} = useAuth();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -42,7 +44,7 @@ const Register = () => {
         formPayload.append("profilepic", profilePicFile);
       }
 
-      const res = await fetch("http://localhost:5650/api/users/register", {
+      const res = await fetch(`${API}/api/users/register`, {
         method: "POST",
         body: formPayload, // Content-Type nahi dena, browser set karega multipart/form-data
       });

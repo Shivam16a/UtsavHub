@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import {useAuth} from "../context/AuthContext";
 
 const EventRegister = () => {
   const { id } = useParams(); // eventId from route
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const {API} = useAuth();
 
   const handleRegister = async () => {
     try {
@@ -14,7 +16,7 @@ const EventRegister = () => {
       setError("");
 
       const response = await fetch(
-        "http://localhost:5650/api/eventregister/register",
+        `${API}/api/eventregister/register`,
         {
           method: "POST",
           headers: {

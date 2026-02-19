@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 const CreateEvent = () => {
   const [form, setForm] = useState({
@@ -12,6 +13,7 @@ const CreateEvent = () => {
   const [banner, setBanner] = useState(null);
   const [preview, setPreview] = useState(null);
   const [error, setError] = useState("");
+  const {API} = useAuth();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -33,7 +35,7 @@ const CreateEvent = () => {
     if (banner) formData.append("banner", banner);
 
     try {
-      const res = await fetch("http://localhost:5650/api/events/create", {
+      const res = await fetch(`${API}/api/events/create`, {
         method: "POST",
         credentials: "include",
         body: formData,

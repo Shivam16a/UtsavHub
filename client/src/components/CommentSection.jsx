@@ -1,15 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
+import {useAuth} from "../context/AuthContext";
 
 const CommentSection = ({ eventId }) => {
   const [comments, setComments] = useState([]);
   const [text, setText] = useState("");
   const containerRef = useRef(null);
+  const {API} = useAuth();
 
   useEffect(() => {
     const fetchComments = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5650/api/comments/${eventId}`,
+          `${API}/api/comments/${eventId}`,
           { credentials: "include" }
         );
 
@@ -37,7 +39,7 @@ const CommentSection = ({ eventId }) => {
 
     if (!text.trim()) return;
 
-    fetch(`http://localhost:5650/api/comments/${eventId}`, {
+    fetch(`${API}/api/comments/${eventId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

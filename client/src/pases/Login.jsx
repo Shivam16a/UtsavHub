@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext"; // ✅ AuthContext se
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth(); // global login function
+  const { login, API } = useAuth(); // global login function
 
   const [formData, setFormData] = useState({
     prn: "",
@@ -22,7 +22,7 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5650/api/users/login", {
+      const response = await fetch(`${API}/api/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

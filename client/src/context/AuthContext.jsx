@@ -3,6 +3,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
+const API = import.meta.env.VITE_API_URL;
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -16,7 +17,7 @@ export const AuthProvider = ({ children }) => {
           setTimeout(() => setUser(JSON.parse(storedUser)), 0);
         }
 
-        const res = await fetch("http://localhost:5650/api/users/me", {
+        const res = await fetch(`${API}/api/users/me`, {
           credentials: "include",
         });
 
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    await fetch("http://localhost:5650/api/users/logout", {
+    await fetch(`${API}/api/users/logout`, {
       method: "POST",
       credentials: "include",
     });
@@ -57,7 +58,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, loading,API }}>
       {children}
     </AuthContext.Provider>
   );

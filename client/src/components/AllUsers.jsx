@@ -1,22 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useLocation } from "react-router-dom";
+import {useAuth} from "../context/AuthContext";
 
 const AllUsers = () => {
 
   const [users, setUsers] = useState([])
   const [editingUser, setEditingUser] = useState(null)
   const location = useLocation();
+  const {API} = useAuth();
   const query = new URLSearchParams(location.search).get("search");
 
   // ================= FETCH USERS =================
   const fetchUsers = useCallback(async () => {
 
     try {
-      let url = "http://localhost:5650/api/users/all";
+      let url = `${API}/api/users/all`;
 
       // 🔥 Agar query present hai, to search route call karo
       if (query) {
-        url = `http://localhost:5650/api/users/search?query=${query}`;
+        url = `${API}/api/users/search?query=${query}`;
       }
 
       const response = await fetch(url, { method: "GET", credentials: "include" });
@@ -44,7 +46,7 @@ const AllUsers = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5650/api/users/${id}`,
+        `${API}/api/users/${id}`,
         {
           method: "DELETE",
           credentials: "include"
@@ -66,7 +68,7 @@ const AllUsers = () => {
   const handleUpdate = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5650/api/users/${editingUser._id}`,
+        `${API}/api/users/${editingUser._id}`,
         {
           method: "PUT",
           headers: {
