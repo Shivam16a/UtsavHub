@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: 'https://eventsphere-flame.vercel.app'||'*',
+    origin: 'http://localhost:5173',
     credentials: true
 }));
 
@@ -21,10 +21,10 @@ app.use(session({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { 
-        secure: process.env.NODE_ENV === "production",
+    cookie: {
+        secure: false,       // VERY IMPORTANT for localhost
         httpOnly: true,
-        sameSite: "none"
+        sameSite: "lax"      // change from "none"
     }
 }));
 
@@ -33,7 +33,7 @@ app.use('/api/users', userRoute);
 app.use('/uploads', express.static('uploads'));
 app.use('/api/events', eventRoutes);
 app.use('/api/comments', commentRoutes);
-app.use('/api/eventregister',enentRegisterRoute);
+app.use('/api/eventregister', enentRegisterRoute);
 
 
 

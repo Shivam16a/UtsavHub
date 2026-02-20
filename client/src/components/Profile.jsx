@@ -16,7 +16,9 @@ const Profile = () => {
       try {
         // Fetch user
         const resUser = await fetch(
-          `${API}/api/users/me`
+          `${API}/api/users/me`,{
+            credentials:"include"
+          }
         );
         const userData = await resUser.json();
         setUser(userData);
