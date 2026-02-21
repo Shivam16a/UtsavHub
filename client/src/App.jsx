@@ -6,6 +6,7 @@ import "./App.css"
 import Register from './pases/Register'
 import Login from './pases/Login'
 import Profile from './components/Profile'
+import Event from './pases/Event'
 import CreateEvent from './pases/CreateEvent'
 import Navbar from './components/Navbar'
 import Admin from './components/Admin'
@@ -28,6 +29,7 @@ const App = () => {
 
         <Route element={<PrivateRoute />}>
           <Route path='/' element={<Home />} />
+          <Route path='allevent'element={<Event/>}/>
           <Route path='/create' element={<CreateEvent />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/about' element={<About />} />

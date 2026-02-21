@@ -1,4 +1,5 @@
 import React from "react";
+import FavIcon from '../assets/Event2.svg'
 
 const Footer = () => {
   return (
@@ -10,10 +11,15 @@ const Footer = () => {
           <div className="col-md-4 mb-4">
             <h5 className="fw-bold fs-3 text-warning">
               {/* <i className="fa-solid fa-calendar-check me-2 text-primary"></i> */}
-              उत्सवHub
+              <img src={FavIcon}
+                width="35"
+                height="35"
+                className="me-2"
+                alt="EventSphere Logo" />
+              EventSphere
             </h5>
             <p className="text-main small">
-              A smart web-based platform to manage and organize college events 
+              A smart web-based platform to manage and organize college events
               efficiently with secure authentication and real-time tracking.
             </p>
           </div>

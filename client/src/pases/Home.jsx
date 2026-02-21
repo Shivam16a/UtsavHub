@@ -1,10 +1,10 @@
 import React from 'react'
-import Events from './Event'
+import Eventhistory from '../components/Eventhistory'
 
 const Home = () => {
   return (
     <>
-        <Events/>
+        <Eventhistory/>
     </>
   )
 }

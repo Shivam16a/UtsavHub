@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import Aman from '../assets/Aman3.jpeg';
+import Rishi from "../assets/Rishi.jpeg";
+import Kartik from "../assets/kartik.jpeg";
+import Rahul from "../assets/Rahul.jpeg";
+import Aman2 from "../assets/Aman2.jpeg";
 
 const About = () => {
   const [expanded, setExpanded] = useState(null);
@@ -7,35 +12,35 @@ const About = () => {
     {
       name: "Rishi Kumar",
       role: "Project Leader",
-      img: "/public/Rishi.jpeg",
+      img: Rishi,
       description:
         "Handled complete project architecture, backend integration, and deployment coordination.",
     },
     {
       name: "Aman Kumar",
       role: "Member",
-      img: "/public/Aman.jpeg",
+      img: Aman,
       description:
         "Worked on frontend UI design, authentication system, and API integration.",
     },
     {
       name: "Kartik Kumar Mandal",
       role: "Member",
-      img: "/public/kartik.jpeg",
+      img: Kartik,
       description:
         "Managed database schema design and backend route handling.",
     },
     {
       name: "Rahul Kumar",
       role: "Member",
-      img: "/public/Rahul.jpeg",
+      img: Rahul,
       description:
         "Developed admin dashboard and analytics features.",
     },
     {
       name: "Aman Kumar",
       role: "Member",
-      img: "/public/Aman2.jpeg",
+      img: Aman2,
       description:
         "Implemented notification system and routes security.",
     },
@@ -56,7 +61,7 @@ const About = () => {
       <div className="row align-items-center mb-5">
         <div className="col-md-6 mb-4 mb-md-0">
           <img
-            src="/public/Rishi.jpeg"
+            src={Rishi}
             alt="event"
             className="img-fluid rounded-circle shadow"
             style={{ opacity: "0.9", transition: "0.4s" }}
