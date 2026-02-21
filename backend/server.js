@@ -36,7 +36,11 @@ app.use("/api/events", eventRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/eventregister", enentRegisterRoute);
 
-
+// server.js ke niche add karein
+app.get('/api/cron-test', (req, res) => {
+    console.log('Cron job hit at', new Date().toLocaleString());
+    res.send('Cron job executed successfully!');
+});
 
 const PORT = process.env.PORT || 5052;
 app.listen(PORT, () => {
