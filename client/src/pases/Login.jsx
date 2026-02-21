@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext"; // ✅ AuthContext se
+import { useAuth } from "../context/AuthContext"; 
+import { toast } from 'react-toastify';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth(); // global login function
+  const { login, API } = useAuth(); // global login function
 
   const [formData, setFormData] = useState({
     prn: "",
@@ -22,7 +23,7 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5650/api/users/login", {
+      const response = await fetch(`${API}/api/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -36,17 +37,20 @@ const Login = () => {
       login(data.user);
 
       // ✅ Navigate immediately
+      toast.success(data.message);
       navigate("/");
 
     } catch (err) {
       setError(err.message);
+      toast.error(err);
     }
   };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
       <div className="card shadow-lg p-5 rounded-4 col-11 col-md-6 col-lg-4">
-        <h2 className="text-center mb-4 fw-bold text-dark">उत्सवHub Login</h2>
+        <h2 className="text-center mb-4 fw-bold text-dark">EventSphere
+        Login</h2>
 
         {error && <div className="alert alert-danger py-2">{error}</div>}
 

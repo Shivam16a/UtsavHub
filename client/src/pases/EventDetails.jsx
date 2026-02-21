@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CommentSection from "../components/CommentSection";
+import { useAuth } from "../context/AuthContext";
 
 const EventDetails = () => {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [error, setError] = useState("");
+  const {API} = useAuth();
 
   const fetchEvent = async () => {
     try {
-      const res = await fetch(`http://localhost:5650/api/events/${id}`, {
+      const res = await fetch(`${API}/api/events/${id}`, {
         credentials: "include",
       });
       const data = await res.json();
@@ -38,7 +40,7 @@ const EventDetails = () => {
           <div className="card shadow-sm">
             {event.bannerImage && (
               <img
-                src={`http://localhost:5650/uploads/${event.bannerImage}`}
+                src={`${API}/uploads/${event.bannerImage}`}
                 className="card-img-top"
                 alt={event.title}
               />

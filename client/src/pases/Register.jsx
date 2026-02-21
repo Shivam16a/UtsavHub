@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate,Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Register = () => {
 
   const [profilePicFile, setProfilePicFile] = useState(null);
   const [error, setError] = useState("");
+  const {API} = useAuth();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,7 +44,7 @@ const Register = () => {
         formPayload.append("profilepic", profilePicFile);
       }
 
-      const res = await fetch("http://localhost:5650/api/users/register", {
+      const res = await fetch(`${API}/api/users/register`, {
         method: "POST",
         body: formPayload, // Content-Type nahi dena, browser set karega multipart/form-data
       });
@@ -63,7 +65,8 @@ const Register = () => {
       className="d-flex justify-content-center align-items-center vh-100 px-3"
     >
       <div className="card p-4 rounded-4 shadow-lg col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
-        <h2 className="text-center mb-4 fw-bold text-dark">उत्सवHub Register</h2>
+        <h2 className="text-center mb-4 fw-bold text-dark">EventSphere
+        Register</h2>
 
         {error && <div className="alert alert-danger py-2">{error}</div>}
 

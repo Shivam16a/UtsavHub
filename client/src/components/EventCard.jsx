@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import CommentSection from "./CommentSection";
+import { useAuth } from "../context/AuthContext";
 
 const EventCard = ({ event }) => {
   const [showComments, setShowComments] = useState(false);
@@ -7,6 +8,7 @@ const EventCard = ({ event }) => {
   const [showFullDesc, setShowFullDesc] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const {API} = useAuth();
 
 
   const truncateLength = 25;
@@ -21,7 +23,7 @@ const EventCard = ({ event }) => {
       setMessage("");
       setError("");
 
-      const res = await fetch("http://localhost:5650/api/eventregister/register", {
+      const res = await fetch(`${API}/api/eventregister/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -44,7 +46,7 @@ const EventCard = ({ event }) => {
     <div className="card h-100 shadow-sm mb-4">
       {event.bannerImage && (
         <img
-          src={`http://localhost:5650/uploads/${event.bannerImage}`}
+          src={`${API}/uploads/${event.bannerImage}`}
           className="card-img-top"
           alt={event.title}
           style={{ objectFit: "cover", height: "300px" }}

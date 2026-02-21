@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 const EventOrganizer = () => {
   const [organizers, setOrganizers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const {API} = useAuth();
 
   useEffect(() => {
-    fetch("http://localhost:5650/api/events", { credentials: "include" })
+    fetch(`${API}/api/events`, { credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch events");
         return res.json();

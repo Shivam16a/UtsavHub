@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState("");
   const location = useLocation();
+  const {API} = useAuth();
   const query = new URLSearchParams(location.search).get("search");
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         let url = query
-          ? `http://localhost:5650/api/events/search?query=${query}`
-          : "http://localhost:5650/api/events";
+          ? `${API}/api/events/search?query=${query}`
+          : `${API}/api/events`;
 
         const res = await fetch(url, { credentials: "include" });
         const data = await res.json();
