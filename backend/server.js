@@ -13,22 +13,28 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: true,
     credentials: true
 }));
+
+app.set("trust proxy", 1);
 
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false }
+    cookie: {
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
+    }
 }));
 
 app.use('/api/users', userRoute);
 app.use("/uploads", express.static("uploads"));
 app.use("/api/events", eventRoutes);
 app.use("/api/comments", commentRoutes);
-app.use("/api/eventregister",enentRegisterRoute);
+app.use("/api/eventregister", enentRegisterRoute);
 
 
 
