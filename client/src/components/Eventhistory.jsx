@@ -92,7 +92,7 @@ const MemoryEvent = () => {
               collective effort, creating unforgettable memories and inspiring
               leadership, confidence, and resilience among students.
             </p>
-            <button type="button" class="btn btn-primary"><Link to='/allevent' className="text-white fs-5 text-decoration-none">See All Events....</Link></button>
+            <button type="button" className="btn btn-primary"><Link to='/allevent' className="text-white fs-5 text-decoration-none">See All Events....</Link></button>
           </div>
 
         </div>

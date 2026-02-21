@@ -109,7 +109,7 @@ const Profile = () => {
         <p className="text-light">You haven't posted any events yet.</p>
       ) : (
         <div className="row g-3">
-          {events.map(event => (
+          {Array.isArray(events) && events.map(event => (
             <div key={event._id} className="col-12 col-sm-6 col-md-4 col-lg-3">
               <div className="position-relative">
                 <EventCard event={event} />
